@@ -179,7 +179,7 @@ El identificado no necesita \$ y
 tampoco usamos \", simplemente la escribimos y
 acabamos con un salto de línea más el identificador
 CADENAHD;
-
+/*
 echo <<<TABLA
 <table>
     <caption>Tabla de prueba</caption>
@@ -191,6 +191,7 @@ echo <<<TABLA
     <tbody>
     </tbody>
 TABLA;
+*/
 ?>
 <h3> Cadenas Nowdoc</h3>
 <p>La cadena Nowdoc es como Heredoc pero con comillas simples. 
@@ -203,6 +204,59 @@ y el salto de línea no lo respeta,
 no puedo meter variables y solo
 reconoce \\ y \'</p>
 ND;
+?>
+
+<h2>Conversión de tipos</h2>
+<p>Hay dos tipos de conversiones de tipos: Implícitas y explícitas: 
+    Las primeras ocurren cuando en una expresión hay operandos de diferente tipo. PHP convierte alguno de ellso 
+    para evaluar la expresión.</p>
+
+<?php
+$cadena = "25";
+$numero = 8;
+$booleano = true;
+$resultado = $cadena + $numero + $booleano; //25+8+1 (Por el true)
+echo "<p>El resultado es $resultado</p>";
+
+echo <<<IMPORTANTE
+<p>Importante, cuando se haga la conversion implicita, solo afecta al operando durante la evaluacion 
+de la expresión, pero no cambia el tipo de datos de la variable. Es decir, la conversión 
+de la variable $cadena a entero solamente para evaluar la expresión de suma, pero $cadena sigue siendo tipo string</p>
+IMPORTANTE;
+
+$flotante = 3.5;
+$resultado = $cadena + $flotante + $numero + $booleano;
+echo "<p>El resultado es $resultado</p>";
+
+$cadena = "25 marranos dan más provecho que 7 lechones";
+$resultado = $numero + $cadena;
+echo "<p>El resultado es $resultado</p>";
+
+echo <<<EXPLICITAS
+<p>Las conversiones explícitas , conocidas como casting o modelo, se hacen precediendo
+la expresión con el tipo de datos a convertir entre paréntesis</p>
+EXPLICITAS;
+//Para convertir a un número entero sería (int)expresión, (float)expresión, (string)exoresión, etc...
+echo"<p>Conversiones a entero</p>";
+$valor_booleano = true;
+$valor_convertido = (int)$valor_booleano;
+echo "<p>El valor convertido a entero es $valor_convertido</p>"; 
+$valor_float = 3.14159;
+$valor_convertido = (int)$valor_float;
+echo "<p>El valor convertido a entero es $valor_convertido</p>";
+
+$valor_cadena = "123";
+$valor_convertido = (int)$valor_cadena;
+echo "<p>El valor convertido a entero es $valor_convertido</p>";
+
+$valor_float = "3.5614";
+$valor_convertido = (float)$valor_float;
+echo "<p>El valor convertido a float es $valor_convertido</p>";
+
+$valor_flot = "2.5e-10";
+$valor_convertido = (float)$valor_flot;
+echo "<p>El valor convertido a float es $valor_convertido</p>";
+echo "<p>Tipo de datos del valor convertido ". gettype($valor_convertido) . "</p>";
 ?>
     </body>
 </html>
