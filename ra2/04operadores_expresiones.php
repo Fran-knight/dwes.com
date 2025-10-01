@@ -174,8 +174,79 @@ echo "<p>El resultado es $resultado</p>";
 $nombre1 = "abcZacarias";
 $nombre2 = "abcadela";
 $resultado = $nombre1 > $nombre2;
-echo "<p>El resultado es $resultado</p>";
+//Sale falso por la comparacion en codigo ASCII
+echo "<p>Resultado es " . (int)$resultado . "</p>";
+
+//Si debemos comparar sin tener en cuenta las mayúsculas
+$resultado = strtoupper($nombre1) > strtoupper($nombre2);
+echo "<p>Resultado es " . (int)$resultado . "</p>";
+
+$nombre1 = "MariO";
+$nombre2 = "Maria";
+$resultado = $nombre1 > $nombre2;
+echo "<p>Resultado es " . (int)$resultado . "</p>";
+
+$resultado = strtolower($nombre1) > strtolower($nombre2);
+echo "<p>Resultado es " . (int)$resultado . "</p>";
+
 ?>
 
+<h2>Operadores lógicos</h2>
+<p>Los operadores lógicos unen expresiones relacionales construidas
+    con los operadores relacionales anteriores. Arrojan un resultado 
+    booleano en funcion de las tablas de verdad.</p>
+
+<?php
+/*  
+    AND -> True si ambas expresiones son true, de otra forma, false
+    OR -> True si alguna de las expresiones es true.
+    XOR -> Operador lógico or exclusivo, True si solo una, y solo una, 
+    de las expresiones es true, false si ambas expresiones es true o false
+    && -> Similar a AND pero con mayor precedencia
+    || -> && -> Similar a OR pero con mayor precedencia
+    ! -> Operador lógico NOT, invierte el resultado booleano de una expresión.
+
+*/
+
+$n1 = 9;
+$n2 = 5;
+$n3 = 10;
+
+$resultado = $n1 == $n2 or $n2 > $n3;
+echo "<p>El resultado es " . (int)$resultado . "</p>";
+
+$resultado = $n1 == $n2 and $n2 < $n3;
+echo "<p>El resultado es " . (int)$resultado . "</p>";
+
+$resultado = $n1 == 9 or $n2 < $n1 and $n3 > 10;
+echo "<p>El resultado es " . (int)$resultado . "</p>";
+
+
+$resultado = $n1 == 9 || $n2 < $n1 and $n3 > 10;
+echo "<p>El resultado es " . (int)$resultado . "</p>";
+
+$resultado = !$n1 == 9 || $n2 < $n1;
+echo "<p>El resultado es " . (int)$resultado . "</p>";
+?>
+
+<h3>Preferencia y asociativilidad</h3>
+<p>En una expresión con múltiples operadores se ejecutan en un determinado orden dictado por 
+    la precedencia de cada operador. Si hay mas de un poerador con la misma precedendia, se aplica la 
+    asociatividad. 
+</p>
+
+<?php
+$resultado = $n1 + 5 / $n3 < $n1 ** 3 and $n3 / 5 + $n2 * 2 >= $n1 * $n2 / $n3 or $n1 - 3 % 2 == $n3 - 7;
+echo "<p>El resultado es " . (int)$resultado ."</p>";
+
+?>
+
+<!-- 
+    Estilos de codificación
+    Variables, métodos y variables de instancia.            ->              camelCase Ej. precioVenta
+    Clases                                                  ->              PascalCase Ej. ClientePotencial
+    Constantes                                              ->              GREAT_SNAKE_CASE Ej. PORCENTAJE_IVA_NUMERO_PI
+    Propiedades de Clase                                    ->              GREAT_SNAKE_CASE
+-->
     </body>
 </html>
